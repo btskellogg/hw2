@@ -95,6 +95,14 @@ puts ""
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
 
+## Clear Data
+Movie.destroy_all
+Studio.destroy_all
+Actor.destroy_all
+Role.destroy_all
+## Clear Data
+
+
 #Studio Entry
 studio = Studio.new
 studio["name"] = "Warner Bros"
@@ -261,3 +269,31 @@ role["character name"] = "Selina Kyle"
 role.save
 
 ##
+
+puts "Movies"
+puts "======"
+puts ""
+
+# Define the column widths
+title_width = 24
+year_width = 10
+rating_width = 10
+studio_id_width = 10
+
+# Display column headers
+printf("%-#{title_width}s%-#{year_width}s%-#{rating_width}s%-#{studio_id_width}s\n", "Title", "Year", "Rating", "Studio ID")
+puts "-" * (title_width + year_width + rating_width + studio_id_width)
+
+allmovies = Movie.all
+
+for movie in allmovies
+    # store variables
+    title = movie["title"];
+    year = movie["year released"];
+    rating = movie["rated"];
+    studio_id = Studio.find_by(id: movie.studio_id).name
+  
+    # display string
+    printf("%-#{title_width}s%-#{year_width}s%-#{rating_width}s%-#{studio_id_width}s\n", title, year, rating, studio_id)
+  end
+
