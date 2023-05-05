@@ -94,3 +94,170 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+
+#Studio Entry
+studio = Studio.new
+studio["name"] = "Warner Bros"
+studio.save
+
+#Movie Entries
+movie = Movie.new
+movie["title"] = "Batman Begins"
+movie["year released"] = 2005
+movie["rated"] = "PG-13"
+movie["studio_id"] = 1
+movie.save
+
+movie = Movie.new
+movie["title"] = "The Dark Knight"
+movie["year released"] = 2008
+movie["rated"] = "PG-13"
+movie["studio_id"] = 1
+movie.save
+
+movie = Movie.new
+movie["title"] = "The Dark Knight Rises"
+movie["year released"] = 2012
+movie["rated"] = "PG-13"
+movie["studio_id"] = 1
+movie.save
+
+#Actor Entries
+actor = Actor.new
+actor["name"] = "Christian Bale"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Michael Caine"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Liam Neeson"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Katie Holmes"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Gary Oldman"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Heath Ledger"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Aaron Eckhart"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Maggie Gyllenhaal"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Tom Hardy"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Joseph Gordon-Levitt"
+actor.save
+
+actor = Actor.new
+actor["name"] = "Anne Hathaway"
+actor.save
+
+#Role Entries
+role = Role.new
+role["movie_id"] = 1
+role["actor_id"] = 1
+role["character name"] = "Bruce Wayne"
+role.save
+
+role = Role.new
+role["movie_id"] = 1
+role["actor_id"] = 2
+role["character name"] = "Alfred"
+role.save
+
+role = Role.new
+role["movie_id"] = 1
+role["actor_id"] = 3
+role["character name"] = "Ra's Al Ghul"
+role.save
+
+role = Role.new
+role["movie_id"] = 1
+role["actor_id"] = 4
+role["character name"] = "Rachel Dawes"
+role.save
+
+role = Role.new
+role["movie_id"] = 1
+role["actor_id"] = 5
+role["character name"] = "Commissioner Gordon"
+role.save
+
+
+role = Role.new
+role["movie_id"] = 2
+role["actor_id"] = 1
+role["character name"] = "Bruce Wayne"
+role.save
+
+role = Role.new
+role["movie_id"] = 2
+role["actor_id"] = 6
+role["character name"] = "Joker"
+role.save
+
+role = Role.new
+role["movie_id"] = 2
+role["actor_id"] = 7
+role["character name"] = "Harvey Dent"
+role.save
+
+role = Role.new
+role["movie_id"] = 2
+role["actor_id"] = 2
+role["character name"] = "Alfred"
+role.save
+
+role = Role.new
+role["movie_id"] = 2
+role["actor_id"] = 8
+role["character name"] = "Rachel Dawes"
+role.save
+
+
+role = Role.new
+role["movie_id"] = 3
+role["actor_id"] = 1
+role["character name"] = "Bruce Wayne"
+role.save
+
+role = Role.new
+role["movie_id"] = 3
+role["actor_id"] = 5
+role["character name"] = "Commissioner Gordon"
+role.save
+
+role = Role.new
+role["movie_id"] = 3
+role["actor_id"] = 9
+role["character name"] = "Bane"
+role.save
+
+role = Role.new
+role["movie_id"] = 3
+role["actor_id"] = 10
+role["character name"] = "John Blake"
+role.save
+
+role = Role.new
+role["movie_id"] = 3
+role["actor_id"] = 11
+role["character name"] = "Selina Kyle"
+role.save
+
+##
