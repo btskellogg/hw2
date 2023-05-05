@@ -108,26 +108,29 @@ studio = Studio.new
 studio["name"] = "Warner Bros"
 studio.save
 
+
+
 #Movie Entries
+warner = Studio.find_by({"name" => "Warner Bros"})
 movie = Movie.new
 movie["title"] = "Batman Begins"
 movie["year released"] = 2005
 movie["rated"] = "PG-13"
-movie["studio_id"] = 1
+movie["studio_id"] = warner["id"]
 movie.save
 
 movie = Movie.new
 movie["title"] = "The Dark Knight"
 movie["year released"] = 2008
 movie["rated"] = "PG-13"
-movie["studio_id"] = 1
+movie["studio_id"] = warner["id"]
 movie.save
 
 movie = Movie.new
 movie["title"] = "The Dark Knight Rises"
 movie["year released"] = 2012
 movie["rated"] = "PG-13"
-movie["studio_id"] = 1
+movie["studio_id"] = warner["id"]
 movie.save
 
 #Actor Entries
@@ -176,95 +179,106 @@ actor["name"] = "Anne Hathaway"
 actor.save
 
 #Role Entries
+begins = Movie.find_by({"title" => "Batman Begins"})
+bale = Actor.find_by({"name" => "Christian Bale"})
 role = Role.new
-role["movie_id"] = 1
-role["actor_id"] = 1
+movie["movie_id"] = begins["id"]
+role["actor_id"] = bale
 role["character name"] = "Bruce Wayne"
 role.save
 
+caine = Actor.find_by({"name" => "Michael Caine"})
 role = Role.new
-role["movie_id"] = 1
-role["actor_id"] = 2
+role["movie_id"] = begins["id"]
+role["actor_id"] = caine
 role["character name"] = "Alfred"
 role.save
 
+neeson = Actor.find_by(name: "Liam Neeson")
 role = Role.new
-role["movie_id"] = 1
-role["actor_id"] = 3
+role["movie_id"] = begins["id"]
+role["actor_id"] = neeson
 role["character name"] = "Ra's Al Ghul"
 role.save
 
+holmes = Actor.find_by(name: "Katie Holmes")
 role = Role.new
-role["movie_id"] = 1
-role["actor_id"] = 4
+role["movie_id"] = begins["id"]
+role["actor_id"] = holmes
 role["character name"] = "Rachel Dawes"
 role.save
 
 role = Role.new
-role["movie_id"] = 1
+role["movie_id"] = begins["id"]
 role["actor_id"] = 5
 role["character name"] = "Commissioner Gordon"
 role.save
 
-
+dark1 = Movie.find_by({"title" => "The Dark Knight"})
+oldman = Actor.find_by(name: "Gary Oldman")
 role = Role.new
-role["movie_id"] = 2
-role["actor_id"] = 1
+role["movie_id"] = dark1
+role["actor_id"] = oldman
 role["character name"] = "Bruce Wayne"
 role.save
 
+ledger = Actor.find_by(name: "Heath Ledger")
 role = Role.new
-role["movie_id"] = 2
-role["actor_id"] = 6
+role["movie_id"] = dark1
+role["actor_id"] = ledger
 role["character name"] = "Joker"
 role.save
 
+eckhart = Actor.find_by(name: "Aaron Eckhart")
 role = Role.new
-role["movie_id"] = 2
-role["actor_id"] = 7
+role["movie_id"] = dark1
+role["actor_id"] = eckhart
 role["character name"] = "Harvey Dent"
 role.save
 
 role = Role.new
-role["movie_id"] = 2
-role["actor_id"] = 2
+role["movie_id"] = dark1
+role["actor_id"] = caine
 role["character name"] = "Alfred"
 role.save
 
+gyllenhaal = Actor.find_by(name: "Maggie Gyllenhaal")
 role = Role.new
-role["movie_id"] = 2
-role["actor_id"] = 8
+role["movie_id"] = dark1
+role["actor_id"] = gyllenhaal
 role["character name"] = "Rachel Dawes"
 role.save
 
-
+dark2= Movie.find_by({"title" => "The Dark Knight Rises"})
 role = Role.new
-role["movie_id"] = 3
-role["actor_id"] = 1
+role["movie_id"] = dark2
+role["actor_id"] = bale
 role["character name"] = "Bruce Wayne"
 role.save
 
 role = Role.new
-role["movie_id"] = 3
-role["actor_id"] = 5
+role["movie_id"] = dark2
+role["actor_id"] = oldman
 role["character name"] = "Commissioner Gordon"
 role.save
 
+hardy = Actor.find_by(name: "Tom Hardy")
 role = Role.new
-role["movie_id"] = 3
-role["actor_id"] = 9
+role["movie_id"] = dark2
+role["actor_id"] = hardy
 role["character name"] = "Bane"
 role.save
 
+gordon_levitt = Actor.find_by(name: "Joseph Gordon-Levitt")
 role = Role.new
-role["movie_id"] = 3
-role["actor_id"] = 10
+role["movie_id"] = dark2
+role["actor_id"] = gordon_levitt
 role["character name"] = "John Blake"
 role.save
 
-role = Role.new
-role["movie_id"] = 3
-role["actor_id"] = 11
+hathaway = Actor.find_by(name: "Anne Hathaway")
+role["movie_id"] = dark2
+role["actor_id"] = hathaway
 role["character name"] = "Selina Kyle"
 role.save
 
@@ -291,9 +305,35 @@ for movie in allmovies
     title = movie["title"];
     year = movie["year released"];
     rating = movie["rated"];
-    studio_id = Studio.find_by(id: movie.studio_id).name
-  
+    studio = Studio.find_by("id" => movie.studio_id)
+    studio_id = if studio.present? then studio.name else " " end
+
+
+
     # display string
     printf("%-#{title_width}s%-#{year_width}s%-#{rating_width}s%-#{studio_id_width}s\n", title, year, rating, studio_id)
   end
 
+
+# Define the column widths
+movie_width = 25
+actor_width = 25
+role_width = 25
+
+# Display column headers
+printf("%-#{movie_width}s%-#{actor_width}s%-#{role_width}s\n", "Movie", "Actor", "Role")
+puts "-" * (movie_width + actor_width + role_width)
+
+  allroles = Role.all
+
+  for role in allroles
+    # store variables
+    movie = Movie.find_by("id" => role.movie_id)
+    movie_name = if movie.present? then movie.title else " " end #included due to persistant database errors
+    actor = Actor.find_by("id" => role.actor_id)
+    actor_name = if actor.present? then actor.name else " " end #included due to persistant database errors
+    role_name = role["character name"]
+      
+    # display string
+    printf("%-#{movie_width}s%-#{actor_width}s%-#{role_width}s\n", movie_name, actor_name, role_name)
+  end
