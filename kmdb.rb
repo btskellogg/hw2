@@ -79,18 +79,13 @@
 # TODO!
 
 # Prints a header for the movies output
-puts "Movies"
-puts "======"
-puts ""
+
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
 
 # Prints a header for the cast output
-puts ""
-puts "Top Cast"
-puts "========"
-puts ""
+
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
@@ -208,18 +203,18 @@ role["actor_id"] = holmes["id"]
 role["character_name"] = "Rachel Dawes"
 role.save
 
+oldman = Actor.find_by({"name" => "Gary Oldman"})
 role = Role.new
 role["movie_id"] = begins["id"]
-role["actor_id"] = 5
+role["actor_id"] = oldman ["id"]
 role["character_name"] = "Commissioner Gordon"
 role.save
 
 dark1 = Movie.find_by({"title" => "The Dark Knight"})
-oldman = Actor.find_by({"name" => "Gary Oldman"})
 role = Role.new
 role["movie_id"] = dark1["id"]
-role["actor_id"] = oldman["id"]
-role["character_name"] = "Commissioner Gordon"
+role["actor_id"] = bale["id"]
+role["character_name"] = "Bruce Wayne"
 role.save
 
 ledger = Actor.find_by({"name" => "Heath Ledger"})
@@ -260,24 +255,26 @@ role = Role.new
 role["movie_id"] = dark2["id"]
 role["actor_id"] = oldman["id"]
 role["character_name"] = "Commissioner Gordon"
+role.save
 
-hardy = Actor.find_by(name: "Tom Hardy")
+hardy = Actor.find_by({"name" => "Tom Hardy"})
 role = Role.new
-role["movie_id"] = dark2
-role["actor_id"] = hardy
+role["movie_id"] = dark2["id"]
+role["actor_id"] = hardy["id"]
 role["character_name"] = "Bane"
 role.save
 
-gordon_levitt = Actor.find_by(name: "Joseph Gordon-Levitt")
+gordon_levitt = Actor.find_by({"name" => "Joseph Gordon-Levitt"})
 role = Role.new
-role["movie_id"] = dark2
-role["actor_id"] = gordon_levitt
+role["movie_id"] = dark2["id"]
+role["actor_id"] = gordon_levitt["id"]
 role["character_name"] = "John Blake"
 role.save
 
-hathaway = Actor.find_by(name: "Anne Hathaway")
-role["movie_id"] = dark2
-role["actor_id"] = hathaway
+
+hathaway = Actor.find_by({"name" => "Anne Hathaway"})
+role["movie_id"] = dark2["id"]
+role["actor_id"] = hathaway["id"]
 role["character_name"] = "Selina Kyle"
 role.save
 
@@ -287,13 +284,17 @@ puts "Movies"
 puts "======"
 puts ""
 
-# Define the column widths
+## Separation
+puts "Movies"
+puts "======"
+puts ""
+
+# Needed Cleaner Display
 title_width = 24
 year_width = 10
 rating_width = 10
 studio_id_width = 10
 
-# Display column headers
 printf("%-#{title_width}s%-#{year_width}s%-#{rating_width}s%-#{studio_id_width}s\n", "Title", "Year", "Rating", "Studio ID")
 puts "-" * (title_width + year_width + rating_width + studio_id_width)
 
@@ -314,12 +315,17 @@ for movie in allmovies
   end
 
 
-# Define the column widths
+  puts ""
+  puts "Top Cast"
+  puts "========"
+  puts ""
+
+
+# Needed Cleaner Display
 movie_width = 25
 actor_width = 25
 role_width = 25
 
-# Display column headers
 printf("%-#{movie_width}s%-#{actor_width}s%-#{role_width}s\n", "Movie", "Actor", "Role")
 puts "-" * (movie_width + actor_width + role_width)
 
